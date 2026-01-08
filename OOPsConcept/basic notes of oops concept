@@ -1,0 +1,11 @@
+class ->  blueprint of an object
+object -> its have properties and behaviour
+principles of OOPS->
+1. Encapsulation
+2. Inheritance
+3. Polymorphism
+4. Abstraction
+
+1. Encapsulation -> Bundling of data and methods into a single unit (class). and data hiding
+2. Inheritance -> to inherit the some properties from the parent
+4. Abstraction -> to hide the complexity
