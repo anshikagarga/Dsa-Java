@@ -42,6 +42,38 @@ public class heightOfTree {
         return leftSum + rightSum + root.data;
     }
 
+    public static int diameter2(Node root){
+        if(root == null){
+            return 0;
+        }
+        int leftDiam = diameter2(root.left);
+        int rightDiam = diameter2(root.right);
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+        int selfDiam = leftHeight + rightHeight +1;
+        return Math.max(selfDiam, Math.max(leftDiam, rightDiam));
+    }
+
+    public static class Info{
+        int diam;
+        int ht;
+        public Info(int diam, int ht){
+            this.diam = diam;
+            this.ht = ht;
+        }
+    }
+    public static  Info diameter(Node root){
+          if(root == null){
+              return new Info(0,0);
+          }
+          Info leftHeight = diameter(root.left);
+          Info rightHeight = diameter(root.right);
+          int diam = Math.max(Math.max(leftHeight.diam, rightHeight.diam), leftHeight.ht + rightHeight.ht + 1);
+          int ht = Math.max(leftHeight.ht, rightHeight.ht) + 1;
+
+          return new Info(diam, ht);
+    }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
@@ -51,6 +83,7 @@ public class heightOfTree {
         root.right.left = new Node(6);
 //        root.right.right = new Node(7);
 //        System.out.println(height(root));
-        System.out.print(sum(root));
+//        System.out.print(sum(root));
+        System.out.println(diameter(root).diam);
     }
 }
