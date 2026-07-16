@@ -107,6 +107,49 @@ public class TopOfView {
         return lca;
     }
 
+    public static Node lca2(Node root, int n1, int n2){
+
+        if(root ==  null || root.data == n1 || root.data ==  n2){
+            return root;
+        }
+        Node leftLca = lca2(root.left, n1, n2);
+        Node rightLca = lca2(root.right, n1, n2);
+        //leftLCA = val rightLca = val
+        if(rightLca == null){
+            return leftLca;
+        }
+        if(leftLca == null){
+            return rightLca;
+        }
+        return root;
+    }
+
+    public static int lcaDist(Node root, int n){
+        if(root == null ){
+            return -1;
+        }
+        if(root.data == n){
+            return 0;
+        }
+        int leftDist = lcaDist(root.left, n);
+        int rightDist = lcaDist(root.right, n);
+        if(leftDist == -1 && rightDist == -1){
+            return -1;
+        }else if(leftDist == -1){
+            return rightDist + 1;
+        }else{
+            return leftDist+1;
+        }
+
+    }
+
+    public static int minDist(Node root, int n1, int n2){
+        Node lca = lca2(root, n1, n2);
+        int dst1 = lcaDist(lca, n1);
+        int dst2 = lcaDist(lca, n2);
+        return dst1+dst2;
+    }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
@@ -118,9 +161,10 @@ public class TopOfView {
 
 //        int k = 2;
 //        kLevel(root, 1, 2);
-        int n1 = 4, n2 = 5;
-        System.out.println(lca(root,n1,n2).data);
+        int n1 = 4, n2 = 6;
+//        System.out.println(lca2(root,n1,n2).data);
 //        TopView(root);
+        System.out.println(minDist(root, n1, n2));
 
     }
 }
