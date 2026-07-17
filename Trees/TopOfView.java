@@ -143,6 +143,49 @@ public class TopOfView {
 
     }
 
+    public static int Kancestor(Node root, int n, int k){
+        if(root == null){
+            return -1;
+        }
+        if(root.data == n){
+            return 0;
+        }
+        int leftDist = Kancestor(root.left, n, k);
+        int rightDist = Kancestor(root.right, n, k);
+        if(leftDist == -1 && rightDist == -1){
+            return -1;
+        }
+        int max = Math.max(leftDist, rightDist);
+        if(max+1 == k){
+            System.out.println(root.data);
+        }
+        return max+1;
+    }
+
+    public static int transform(Node root){
+        if(root ==  null){
+            return 0;
+        }
+        int leftChild = transform(root.left);
+        int rightChild = transform(root.right);
+        int data =  root.data ;
+        int newLeft = root.left == null ? 0 : root.left.data;
+        int newRight = root.right == null ? 0 : root.right.data;
+        root.data = leftChild +rightChild + newLeft + newRight;
+        return data;
+
+
+    }
+
+    public static void preorder(Node root){
+        if(root == null){
+            return;
+        }
+        System.out.println(root.data + " ");
+        preorder(root.left);
+        preorder(root.right);
+    }
+
     public static int minDist(Node root, int n1, int n2){
         Node lca = lca2(root, n1, n2);
         int dst1 = lcaDist(lca, n1);
@@ -159,12 +202,16 @@ public class TopOfView {
         root.right.left = new Node(6);
         root.right.right = new Node(7);
 
-//        int k = 2;
+        int n=5, k = 2;
 //        kLevel(root, 1, 2);
-        int n1 = 4, n2 = 6;
+//        int n1 = 4, n2 = 6;
 //        System.out.println(lca2(root,n1,n2).data);
 //        TopView(root);
-        System.out.println(minDist(root, n1, n2));
+//        System.out.println(minDist(root, n1, n2));
+//        Kancestor(root, n, k);
+
+        transform(root);
+        preorder(root);
 
     }
 }
