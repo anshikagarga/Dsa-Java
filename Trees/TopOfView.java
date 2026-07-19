@@ -30,6 +30,7 @@ public class TopOfView {
         q.add(new Info(root, 0));
         q.add(null);
 
+
         while(!q.isEmpty()){
             Info curr = q.remove();
             if(curr == null){
