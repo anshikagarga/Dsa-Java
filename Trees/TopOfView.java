@@ -163,7 +163,7 @@ public class TopOfView {
         return max+1;
     }
 
-    public static int transform(Node root){
+    public static int transform( Node root){
         if(root ==  null){
             return 0;
         }
