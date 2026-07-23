@@ -86,6 +86,23 @@ public class Bst {
         return root;
     }
 
+    public static void printInRange(Node root, int k1, int k2){
+        if(root == null){
+            return;
+        }
+        if(root.data >= k1 && root.data <= k2){
+            printInRange(root.left, k1, k2);
+            System.out.print(root.data + " ");
+            printInRange(root.right, k1, k2);
+        }
+        else if(root.data < k1){
+            printInRange(root.left , k1, k2);
+        }
+        else{
+            printInRange(root.right, k1, k2);
+        }
+    }
+
     public static void main(String[] args) {
 //        int values[] = { 5, 1, 3, 4, 2, 7 };
         int values[] = {8, 5,3,1, 4,6,10, 11,14};
@@ -101,10 +118,12 @@ public class Bst {
 //            System.out.println("Not found");
 //        }
 
-        System.out.println();
-        root = delete(root, 1);
-        System.out.println();
+//        System.out.println();
+//        root = delete(root, 1);
+//        System.out.println();
         inorder(root);
+        System.out.println();
+        printInRange(root, 5, 12);
 
 
     }
