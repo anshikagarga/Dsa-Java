@@ -9,10 +9,13 @@ public class insert {
             arr.add(data);
             int x = arr.size()-1; // x is child index
             int par = (x-1)/2; // par index
-            while(arr.get(x)>arr.get(par)){ // o(log n)
+            while(arr.get(x)<arr.get(par)){ // o(log n)
                 int temp = arr.get(x);
                 arr.set(x, arr.get(par));
                 arr.set(par, temp);
+
+                x= par;
+                par = (x-1)/2;
             }
         }
 
@@ -45,7 +48,7 @@ public class insert {
             int data = arr.get(0);
             //step1 - swap first and last
             int temp = arr.get(0);
-            arr.set(0, arr.size()-1);
+            arr.set(0, arr.get(arr.size()-1));
             arr.set(arr.size()-1, temp);
 
             //step2 - delete last
@@ -53,9 +56,22 @@ public class insert {
             heapify(0);
             return data;
         }
+        public boolean isEmpty(){
+            return arr.size() == 0;
+        }
     }
 
     public static void main(String[] args) {
+        Heap h = new Heap();
+        h.add(3);
+        h.add(4);
+
+        h.add(1);
+        h.add(5);
+        while(!h.isEmpty()){
+            System.out.println(h.peek());
+            h.remove();
+        }
 
     }
 }
