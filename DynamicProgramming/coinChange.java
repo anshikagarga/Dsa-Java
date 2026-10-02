@@ -14,6 +14,7 @@ public class coinChange {
         for(int j = 1; j< sum+1; j++){
             dp[0][j] = 0;
         }
+        //o(n * sum)
 
         for(int i = 1; i < n+1; i++){
             for(int j = 1; j < sum+1; j++){
